@@ -138,7 +138,7 @@ yarn web
 2. Создайте файл `.env` в корне проекта (если его нет)
 3. Добавьте ваш API ключ:
 ```
-HUGGING_FACE_API_KEY=your_api_key_here
+EXPO_PUBLIC_HF_TOKEN=your_api_key_here
 ```
 
 **Примечание:** Файл `.env` должен быть добавлен в `.gitignore` для безопасности.
