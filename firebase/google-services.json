@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "665711865082",
+    "project_id": "promptinvoice-10291",
+    "storage_bucket": "promptinvoice-10291.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:665711865082:android:2d21faa3a33d82ac976d43",
+        "android_client_info": {
+          "package_name": "com.promptinvoice.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2xZl-BWDxjD-cLsZYm-FZaJ2-YEAfb0I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

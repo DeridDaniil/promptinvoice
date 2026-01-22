@@ -4,32 +4,39 @@
     "slug": "PromptInvoice",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/logo.webp",
+    "icon": "./assets/images/logo.png",
     "scheme": "promptinvoice",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "googleServicesFile": "./firebase/GoogleService-Info.plist",
+      "bundleIdentifier": "com.promptinvoice.app"
     },
     "android": {
       "package": "com.promptinvoice.app",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/logo.webp"
+        "foregroundImage": "./assets/images/logo.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "googleServicesFile": "./firebase/google-services.json"
     },
     "web": {
       "output": "static",
-      "favicon": "./assets/images/logo.webp"
+      "favicon": "./assets/images/logo.png"
+    },
+    "react-native-google-mobile-ads": {
+      "android_app_id": "ca-app-pub-3940256099942544~3347511713",
+      "ios_app_id": "ca-app-pub-3940256099942544~1458002511"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/logo.webp",
+          "image": "./assets/images/logo.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",
@@ -37,11 +44,35 @@
             "backgroundColor": "#000000"
           }
         }
+      ],
+      "expo-font",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ],
+      "@react-native-firebase/app",
+      [
+        "./plugins/withAdMobAppId",
+        {
+          "androidAppId": "ca-app-pub-3940256099942544~3347511713",
+          "iosAppId": "ca-app-pub-3940256099942544~1458002511"
+        }
       ]
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "dbf3c881-bd9f-46dc-8fee-fccb21d8fc3e"
+      }
+    },
+    "owner": "it5gr"
   }
 }

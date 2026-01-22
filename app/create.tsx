@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { trackAddItem, trackCreateInvoice, trackEditItem, trackRemoveItem } from '../analytics/track';
 import { ConfirmModal } from '../components/ConfirmModal';
 import { DatePicker } from '../components/DatePicker';
 import { ItemRow } from '../components/ItemRow';
@@ -176,6 +177,8 @@ export default function CreateInvoice() {
       return newItems;
     });
 
+    trackEditItem({ item_index: index, field });
+
     setTimeout(() => {
       const errorKey = `item_${index}_${field}`;
       const error = validateField(`item${field.charAt(0).toUpperCase() + field.slice(1)}` as any, value);
@@ -195,12 +198,15 @@ export default function CreateInvoice() {
   }, []);
 
   const handleAddItem = () => {
+    const newIndex = items.length;
     setItems([...items, { description: '', quantity: 1, price: 0 }]);
+    trackAddItem({ item_index: newIndex });
   };
 
   const handleDeleteItem = (index: number) => {
     const newItems = items.filter((_, i) => i !== index);
     setItems(newItems);
+    trackRemoveItem({ item_index: index });
   };
 
   const showModal = (title: string, message: string, type: 'success' | 'error' | 'info', isSuccess: boolean = false) => {
@@ -271,6 +277,11 @@ export default function CreateInvoice() {
       showModal('Success', 'Invoice updated', 'success', true);
     } else {
       addInvoice(input);
+      trackCreateInvoice({
+        client_name: input.clientName,
+        items_count: input.items.length,
+        total: totals.total,
+      });
       showModal('Success', 'Invoice created', 'success', true);
     }
   };

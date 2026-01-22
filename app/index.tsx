@@ -15,6 +15,7 @@ import { InvoiceCard } from '../components/InvoiceCard';
 import { generateAllInvoicesPDF } from '../services/pdfService';
 import { useInvoiceStore } from '../store/useInvoiceStore';
 import { Invoice } from '../types/invoice';
+import { AdBanner } from '../ads/Banner';
 
 export default function Index() {
   const router = useRouter();
@@ -150,6 +151,9 @@ export default function Index() {
           showsVerticalScrollIndicator={false}
         />
       )}
+       <View style={{ position: "absolute", bottom: 0, left: 0, right: 0, alignItems: "center" }}>
+        <AdBanner />
+      </View>
     </View>
   );
 }

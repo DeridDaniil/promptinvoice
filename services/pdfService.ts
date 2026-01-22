@@ -1,5 +1,6 @@
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
+import { trackExportPdf, trackShareInvoice } from '../analytics/track';
 import { Invoice } from '../types/invoice';
 
 const generateInvoiceHTML = (invoice: Invoice): string => {
@@ -636,6 +637,8 @@ export const generateInvoicePDF = async (invoice: Invoice): Promise<void> => {
       height: 842,
     });
 
+    trackExportPdf({ invoice_id: invoice.id });
+
     const isAvailable = await Sharing.isAvailableAsync();
     if (!isAvailable) {
       throw new Error('Sharing is not available on this device');
@@ -645,6 +648,8 @@ export const generateInvoicePDF = async (invoice: Invoice): Promise<void> => {
       mimeType: 'application/pdf',
       dialogTitle: `Share invoice ${invoice.invoiceNumber}`,
     });
+
+    trackShareInvoice({ invoice_id: invoice.id, invoice_number: invoice.invoiceNumber });
   } catch (error) {
     console.error('PDF generation error:', error);
     throw new Error(
@@ -670,6 +675,8 @@ export const generateAllInvoicesPDF = async (invoices: Invoice[]): Promise<void>
       height: 842,
     });
 
+    trackExportPdf({ invoices_count: invoices.length });
+
     const isAvailable = await Sharing.isAvailableAsync();
     if (!isAvailable) {
       throw new Error('Sharing is not available on this device');
@@ -679,6 +686,8 @@ export const generateAllInvoicesPDF = async (invoices: Invoice[]): Promise<void>
       mimeType: 'application/pdf',
       dialogTitle: `Export all invoices (${invoices.length})`,
     });
+
+    trackShareInvoice({ invoice_id: 'all', invoice_number: `batch_${invoices.length}` });
   } catch (error) {
     console.error('All invoices PDF generation error:', error);
     throw new Error(
