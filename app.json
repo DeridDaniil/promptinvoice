@@ -54,6 +54,7 @@
           }
         }
       ],
+      "react-native-appsflyer",
       "@react-native-firebase/app",
       [
         "./plugins/withAdMobAppId",
